@@ -1,0 +1,26 @@
+{
+  "name": "dockerode-options",
+  "version": "0.0.0",
+  "description": "Parse docker options out of DOCKER_HOST or Docker in Docker setup",
+  "main": "parse.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lightsofapollo/dockerode-options.git"
+  },
+  "keywords": [
+    "docker",
+    "dockerode",
+    "DOCKER_HOST"
+  ],
+  "author": "James Lal [:lightsofapollo]",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lightsofapollo/dockerode-options/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.0"
+  }
+}
