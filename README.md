@@ -1,13 +1,13 @@
 dockerode-options
 =================
 
-Parse dockerode options from a string for DOCKER_HOST and DIND use cases
+Can both parse string based options (like 127.0.0.1:4243) for dockerode and find sensible defaults for connecting to docker.
 
-Dockerode (and most other clients even in other languages) don't
-support the same format as DOCKER_HOST so I wrote this to handle the
-differences.
 
 ## Usage
+
+
+### With a string
 
 ```js
 var dockerOpts = require('dockerode-options');
@@ -19,4 +19,13 @@ var options = dockerOpts(process.env.DOCKER_HOST);
 
 // these can now be used to start dockerode
 var docker = new Docker(options);
+```
+
+
+### With no options
+
+```js
+var dockerOpts = require('dockerode-options');
+var options = dockerOpts();
+// => '/var/run/docker.sock';
 ```
