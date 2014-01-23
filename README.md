@@ -27,5 +27,17 @@ var docker = new Docker(options);
 ```js
 var dockerOpts = require('dockerode-options');
 var options = dockerOpts();
-// => '/var/run/docker.sock';
+// => { socketPath: '/var/run/docker.sock' }
 ```
+
+### With DOCKER_HOST environment variable set
+
+```js
+var dockerOpts = require('dockerode-options');
+
+process.env.DOCKER_HOST = '127.0.0.1:60022';
+
+var options = dockerOpts();
+// => { host: '127.0.0.1', port: 60022  };
+```
+
