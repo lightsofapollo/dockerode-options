@@ -2,7 +2,7 @@
   "name": "dockerode-options",
   "version": "0.0.0",
   "description": "Parse docker options out of DOCKER_HOST or Docker in Docker setup",
-  "main": "parse.js",
+  "main": "defaults.js",
   "scripts": {
     "test": "make test"
   },

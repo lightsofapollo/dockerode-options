@@ -1,6 +1,6 @@
 describe('options parsing', function() {
   var assert = require('assert');
-  var subject = require('./');
+  var subject = require('./defaults');
 
   it('should not parse objects but return them', function() {
     var input = {};
