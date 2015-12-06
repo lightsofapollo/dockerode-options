@@ -41,3 +41,13 @@ var options = dockerOpts();
 // => { host: '127.0.0.1', port: 60022  };
 ```
 
+### With DOCKER_CERT_PATH environment variable set
+
+```js
+var dockerOpts = require('dockerode-options');
+
+process.env.DOCKER_CERT_PATH = '/home/certs';
+
+var options = dockerOpts();
+// => { ca: <contents of /home/certs/ca.pem>, cert: <contents of /home/certs/cert.pem>, key: <contents of /home/certs/key.pem>  };
+```
