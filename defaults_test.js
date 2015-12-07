@@ -39,7 +39,7 @@ describe('defaults test', function() {
   });
 
   it('should read certificates from DOCKER_CERT_PATH', function() {
-    process.env.DOCKER_CERT_PATH = path.resolve(__dirname, 'certs');
+    process.env.DOCKER_CERT_PATH = path.resolve(__dirname, 'examples/certs');
 
     assert.deepEqual(
       // null should convert into a real value
