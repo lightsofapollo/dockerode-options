@@ -1,3 +1,6 @@
+var path = require('path');
+var fs = require('fs');
+
 var parse = require('./parse');
 
 // default docker path on linux
@@ -11,16 +14,26 @@ are given.
 @return {Object} docker options.
 */
 function defaults(options) {
-  // if there are options given just return those
-  if (options) return parse(options);
-
-  // DOCKER_HOST is used generally when there is a remote host (like on OSX)
-  if (process.env.DOCKER_HOST) {
-    return parse(process.env.DOCKER_HOST);
+  if (typeof options === 'object' && options !== null) {
+    return options;
   }
 
-  // finally the socket path is the default (linux)
-  return { socketPath: DEFAULT_SOCKET_PATH };
+  if (typeof options === 'string') {
+    options = parse(options);
+  } else if (process.env.DOCKER_HOST) {
+    // DOCKER_HOST is used generally when there is a remote host (like on OSX)
+    options = parse(process.env.DOCKER_HOST);
+  } else {
+    options = { socketPath: DEFAULT_SOCKET_PATH };
+  }
+
+  if (process.env.DOCKER_CERT_PATH) {
+    options.ca = fs.readFileSync(path.join(process.env.DOCKER_CERT_PATH, 'ca.pem'));
+    options.cert = fs.readFileSync(path.join(process.env.DOCKER_CERT_PATH, 'cert.pem'));
+    options.key = fs.readFileSync(path.join(process.env.DOCKER_CERT_PATH, 'key.pem'));
+  }
+
+  return options;
 }
 
 module.exports = defaults;

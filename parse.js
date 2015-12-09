@@ -4,12 +4,7 @@ var URL = require('url');
 var DEFAULT_PROTOCOL = 'http:';
 
 /**
-This module parses the modem options from a string if needed.
-
-Given an object his module will return that object.
-
-Given a string the module will parse it and return the correct internal
-options as an object.
+This module parses passed DOCKER_HOST
 
 $PORT:HOST string
 
@@ -21,22 +16,19 @@ parse('/magic/path');
 // => { socketPath: '/magic/path' }
 ```
 
-@param {String|Object} options for connection.
-@return {Object} proper options for modem.
+@param {String} url for connection.
+@return {Object} proper url for modem.
 */
-function parse(options) {
-  // XXX: should we validate?
-  if (typeof options !== 'string') return options;
-
+function parse(url) {
   // if it starts with a slash its a path
-  if (options[0] === '/') return { socketPath: options };
+  if (url[0] === '/') return { socketPath: url };
 
-  // default docker options bail if there is a protocol so special case support.
-  if (options.indexOf('://') === -1) {
-    options = DEFAULT_PROTOCOL + '//' + options;
+  // default docker url bail if there is a protocol so special case support.
+  if (url.indexOf('://') === -1) {
+    url = DEFAULT_PROTOCOL + '//' + url;
   }
 
-  var parsed = URL.parse(options);
+  var parsed = URL.parse(url);
 
   // docker in docker uses tcp:// to indicate a docker host. Remap this to http
   if (parsed.protocol.indexOf('http') !== 0) {
